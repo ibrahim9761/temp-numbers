@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TempLine — Disposable numbers, live inbox</title>
+<meta name="description" content="Grab a temporary phone number and watch SMS arrive in real time. No signup, no app, no trace." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="noise"></div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <span class="bar b1"></span><span class="bar b2"></span><span class="bar b3"></span><span class="bar b4"></span>
+      </span>
+      <span class="brand-word">TEMP<span class="accent">LINE</span></span>
+    </a>
+    <nav class="site-nav">
+      <a href="#dashboard">Get a line</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="status-pill">
+      <span class="dot" aria-hidden="true"></span>
+      SYSTEM ONLINE
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">Public · Disposable · No account</p>
+      <h1>Borrow a number.<br>Let <span class="accent">the messages</span> come to you.</h1>
+      <p class="hero-sub">
+        Pick any open line below, hand the number to whatever needs to text you a code,
+        and watch the inbox update live. When you're done, just pick another one.
+      </p>
+      <div class="hero-cta">
+        <a href="#dashboard" class="btn btn-primary">Browse open lines</a>
+        <a href="#how" class="btn btn-ghost">How it works</a>
+      </div>
+    </div>
+    <div class="hero-signal" aria-hidden="true">
+      <div class="signal-strip large">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <p class="hero-signal-label">Listening for incoming SMS</p>
+    </div>
+  </section>
+
+  <section id="dashboard" class="dashboard wrap">
+    <div class="panel lines-panel">
+      <div class="panel-head">
+        <h2>Open lines</h2>
+        <button id="refreshNumbers" class="icon-btn" title="Refresh list" aria-label="Refresh available numbers">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12a9 9 0 1 1-2.6-6.4M21 4v5h-5"/>
+          </svg>
+        </button>
+      </div>
+      <p class="panel-sub">Shared, public numbers. Anyone can see anything sent to them &mdash; never use for anything private.</p>
+
+      <div id="linesState" class="state-block">
+        <div class="signal-strip"><span></span><span></span><span></span><span></span><span></span></div>
+        <p>Scanning for open lines&hellip;</p>
+      </div>
+
+      <ul id="linesList" class="lines-list" hidden></ul>
+    </div>
+
+    <div class="panel inbox-panel">
+      <div class="panel-head">
+        <h2>Inbox</h2>
+        <div id="liveBadge" class="live-badge" hidden>
+          <span class="signal-strip small"><span></span><span></span><span></span><span></span></span>
+          LIVE
+        </div>
+      </div>
+
+      <div id="inboxEmpty" class="state-block tall">
+        <p class="empty-glyph">＋</p>
+        <p>Select a line on the left to open its inbox.</p>
+      </div>
+
+      <div id="inboxActive" hidden>
+        <div class="active-number-row">
+          <div>
+            <p class="label-mini">Active number</p>
+            <p id="activeNumber" class="active-number">&mdash;</p>
+          </div>
+          <button id="copyNumber" class="btn btn-small">Copy</button>
+        </div>
+
+        <div id="inboxLoading" class="state-block" hidden>
+          <div class="signal-strip"><span></span><span></span><span></span><span></span><span></span></div>
+          <p>Checking for messages&hellip;</p>
+        </div>
+
+        <div id="inboxWaiting" class="state-block tall" hidden>
+          <p class="empty-glyph pulse">…</p>
+          <p>No messages yet. This inbox refreshes on its own every few seconds.</p>
+        </div>
+
+        <ul id="messageList" class="message-list" hidden></ul>
+
+        <div id="inboxError" class="state-block error" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="how wrap">
+    <h2>How it works</h2>
+    <div class="how-grid">
+      <div class="how-card">
+        <p class="how-step">Step 01</p>
+        <h3>Pick a line</h3>
+        <p>Choose any number from the open list. It's shared and public &mdash; treat it like a payphone, not a mailbox.</p>
+      </div>
+      <div class="how-card">
+        <p class="how-step">Step 02</p>
+        <h3>Use it to verify</h3>
+        <p>Paste the number into whatever site or app is asking for SMS verification.</p>
+      </div>
+      <div class="how-card">
+        <p class="how-step">Step 03</p>
+        <h3>Watch it arrive</h3>
+        <p>The inbox polls automatically. The signal strip pulses while it checks, and messages appear the moment they land.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq wrap">
+    <h2>Good to know</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h3>Is this private?</h3>
+        <p>No. These are shared public numbers &mdash; anyone can request the same line and read the same inbox. Never use one for anything that matters long-term, like account recovery.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How long does a number last?</h3>
+        <p>Availability depends entirely on the upstream provider. If a line stops receiving messages, just grab another one from the list.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do I need an account?</h3>
+        <p>No signup, no login. Open the page, pick a line, done.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I send texts from it?</h3>
+        <p>No &mdash; this tool only receives. It's built for one-time codes and verification texts, not two-way messaging.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>TEMP<span class="accent">LINE</span></span>
+    <span class="footer-note">Numbers are public and temporary. Nothing sent here is private.</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
