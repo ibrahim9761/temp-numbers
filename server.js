@@ -46,8 +46,10 @@ async function fetchJson(url, ms = 12000) {
 // need to edit — add the field name to the relevant `||` chain below.
 
 function normalizeNumbers(json) {
+  // Confirmed live shape from apis.davidcyriltech.my.id/tempnumber/sms24/numbers:
+  // { creator, success, source, result: { numbers: [...], total } }
   let arr = [];
-  if (Array.isArray(json)) arr = json;
+  if (json.result && Array.isArray(json.result.numbers)) arr = json.result.numbers;
   else if (Array.isArray(json.numbers)) arr = json.numbers;
   else if (Array.isArray(json.data)) arr = json.data;
   else if (Array.isArray(json.result)) arr = json.result;
@@ -68,8 +70,10 @@ function normalizeNumbers(json) {
 }
 
 function normalizeInbox(json) {
+  // Confirmed live shape from apis.davidcyriltech.my.id/tempnumber/sms24/inbox:
+  // { creator, success, source, result: { number, messages: [...], total } }
   let arr = [];
-  if (Array.isArray(json)) arr = json;
+  if (json.result && Array.isArray(json.result.messages)) arr = json.result.messages;
   else if (Array.isArray(json.messages)) arr = json.messages;
   else if (Array.isArray(json.data)) arr = json.data;
   else if (Array.isArray(json.sms)) arr = json.sms;
